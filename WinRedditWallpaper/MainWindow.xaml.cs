@@ -24,23 +24,27 @@ namespace WinRedditWallpaper
     public partial class MainWindow : Window
     {
         private string subredditRawText;
-        public MainWindow()
+        private PicScraper pic;
+        public MainWindow(PicScraper pic)
         {
             InitializeComponent();
+            this.pic = pic;
             //PicScraper.scrape();
         }
 
         private void SubredditsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             subredditRawText = SubredditsTextBox.Text;
+            subredditRawText = subredditRawText.Trim().Replace(" ", "");
+            string[] subreddits = subredditRawText.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            pic.subreddits = subreddits;
         }
 
         private void GetSubredditPics_Click(object sender, RoutedEventArgs e)
         {
-            if (subredditRawText != null)
+            if (pic.subreddits != null)
             {
-                subredditRawText = subredditRawText.Trim().Replace(" ", "");
-                PicScraper.scrape(subredditRawText.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries));
+                pic.scrape();
             }
         }
 
@@ -51,8 +55,8 @@ namespace WinRedditWallpaper
             System.Windows.Forms.DialogResult result = browse.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                string path = browse.SelectedPath;
-                Debug.WriteLine(path);
+                pic.path = browse.SelectedPath;
+                Debug.WriteLine(pic.path);
             }
         }
     }
