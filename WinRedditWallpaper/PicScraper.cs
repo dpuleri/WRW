@@ -30,7 +30,8 @@ namespace WinRedditWallpaper
 
             // 1.
             //
-            if (subreddits == null || path == null)
+            if (subreddits.Length == 0 || path == "none" ||
+                subreddits == null || path == null)
             {
                 return;
             }

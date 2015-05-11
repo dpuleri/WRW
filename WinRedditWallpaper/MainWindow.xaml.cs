@@ -56,8 +56,14 @@ namespace WinRedditWallpaper
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 pic.path = browse.SelectedPath;
+                updatePathText(pic.path);
                 Debug.WriteLine(pic.path);
             }
+        }
+
+        public void updatePathText(string text)
+        {
+            PathToDirectory.Text = text;
         }
     }
 }
