@@ -65,5 +65,11 @@ namespace WinRedditWallpaper
         {
             PathToDirectory.Text = text;
         }
+
+        private void ChangeTheme_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeChanger tc = new ThemeChanger();
+            tc.changeTheme();
+        }
     }
 }
