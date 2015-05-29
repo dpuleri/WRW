@@ -68,8 +68,18 @@ namespace WinRedditWallpaper
 
         private void ChangeTheme_Click(object sender, RoutedEventArgs e)
         {
-            ThemeChanger tc = new ThemeChanger();
-            tc.changeTheme();
+            Debug.WriteLine(pic.path);
+            if (!pic.path.Equals("none") && pic.path != null)
+            // note that the path defaults to none because obj is instantiated from settings
+            {
+                ThemeChanger tc = new ThemeChanger();
+                tc.changeTheme(pic.path, 600000);
+            }
+            else
+            {
+                //show dialog box telling user to pic a path
+                MessageBoxResult result = System.Windows.MessageBox.Show("Please choose a folder to download files into and change the theme", "No Folder Entered Error"); 
+            }
         }
     }
 }
