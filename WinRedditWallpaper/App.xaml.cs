@@ -33,15 +33,23 @@ namespace WinRedditWallpaper
             Debug.WriteLine(subreddits.Length);
             Debug.WriteLine(subreddits == null);
 
-            MainWindow mainWindow = new MainWindow(new PicScraper(subreddits, path));
-            if (path != "none")
+            if (true)
             {
-                mainWindow.updatePathText(path);
-            }
+                MainWindow mainWindow = new MainWindow(new PicScraper(subreddits, path));
+                if (path != "none")
+                {
+                    mainWindow.updatePathText(path);
+                }
 
-            //WallpaperChanger.setDesktopWallpaper(@"C:\\Users\\Daniel\\Desktop\\tmp2");
-            //Debug.WriteLine(WallpaperChanger.getDesktopWallpaper());
-            mainWindow.Show();
+                //WallpaperChanger.setDesktopWallpaper(@"C:\\Users\\Daniel\\Desktop\\tmp2");
+                //Debug.WriteLine(WallpaperChanger.getDesktopWallpaper());
+                mainWindow.Show();
+            }
+            else
+            {
+                Debug.WriteLine("wohoo, execute other code");
+                this.Shutdown();
+            }
         }
 
         protected override void OnExit(ExitEventArgs e)
