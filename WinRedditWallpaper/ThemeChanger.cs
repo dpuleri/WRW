@@ -106,8 +106,13 @@ namespace WinRedditWallpaper
                 TaskDefinition td = ts.NewTask();
                 td.RegistrationInfo.Description = "WRW Wallpaper Downloader";
 
+                DailyTrigger dt = new DailyTrigger();
+                dt.StartBoundary = System.DateTime.Today + System.TimeSpan.FromHours(5) +
+                                    System.TimeSpan.FromMinutes(12);
+                dt.DaysInterval = 1; // have it go every day
+
                 // Create a trigger that will fire the task at this time every other day
-                td.Triggers.Add(new DailyTrigger {DaysInterval = 1 });
+                td.Triggers.Add(dt);
 
                 // Create an action that will launch Notepad whenever the trigger fires
                 td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
