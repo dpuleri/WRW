@@ -42,9 +42,15 @@ namespace WinRedditWallpaper
 
         private void GetSubredditPics_Click(object sender, RoutedEventArgs e)
         {
-            if (pic.subreddits != null)
+            if ((pic.subreddits != null && pic.subreddits.Length != 0) &&
+                (!pic.path.Equals("none") && pic.path != null))
             {
                 pic.scrape();
+            }
+            else
+            {
+                //show dialog box telling user to pic a path or write subreddits
+                MessageBoxResult result = System.Windows.MessageBox.Show("Please choose a folder and/or subreddits", "More Information Needed Error"); 
             }
         }
 
