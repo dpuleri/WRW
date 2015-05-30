@@ -2,14 +2,20 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler;
 
 namespace WinRedditWallpaper
 {
     public class ThemeChanger
     {
         private static string USER_PROFILE = "%userprofile%";
-        public ThemeChanger()
-        { }
+        private static string TASK_NAME = @"WRW Wallpaper downloader";
+        private string pathToDir;
+
+        public ThemeChanger(string pathToDir)
+        {
+            this.pathToDir = pathToDir;
+        }
 
         private string getOldTheme()
         {
@@ -19,7 +25,15 @@ namespace WinRedditWallpaper
             DirectoryInfo d = new DirectoryInfo(path); // get all of the files
             FileInfo[] files = d.GetFiles("*.theme"); //get the old theme file
             Debug.WriteLine(files[0].FullName);
-            return files[0].FullName;
+            // Before we return the old path let's store the old theme
+            string sourceFile = files[0].FullName;
+            //only do it if it's NOT a WRW theme
+            if (!files[0].Name.StartsWith("WRW"))
+            {
+                string destFile = Path.Combine(pathToDir, @"OldTheme.theme");
+                System.IO.File.Copy(sourceFile, destFile, false); // do not overwrite if already exists
+            }
+            return sourceFile;
         }
 
         //returns full path to new theme so that the theme can be changed on the fly
@@ -48,11 +62,12 @@ namespace WinRedditWallpaper
                         atSlideShow = true;
                     }
                     else if (atSlideShow && line.Contains("[")) {
-                    // then we're at the end of the slideshow section
+                    // then we're at the end of the slideshow section stop
                         atSlideShow = false;
                     }
                     else if (!atSlideShow)
                     // basically don't want to copy the line if atSlideShow && !line.Contains("")
+                    // but otherwise it's good to copy the line to the new theme
                     {
                         file.WriteLine(line);
                     }
@@ -66,7 +81,7 @@ namespace WinRedditWallpaper
             return newPath;
         }
 
-        public void changeTheme(string pathToDir, int interval)
+        public void changeTheme(int interval)
         {
             //interval is the time between changes in miliseconds
             //pathToDir is the path to the directory where the pictures will be stored
@@ -80,6 +95,39 @@ namespace WinRedditWallpaper
             startInfo.Arguments = "/C " + pathToNewTheme;
             process.StartInfo = startInfo;
             process.Start();
+        }
+
+        public void setTask()
+        {
+            // Get the service on the local machine
+            using (TaskService ts = new TaskService())
+            {
+                // Create a new task definition and assign properties
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "WRW Wallpaper Downloader";
+
+                // Create a trigger that will fire the task at this time every other day
+                td.Triggers.Add(new DailyTrigger {DaysInterval = 1 });
+
+                // Create an action that will launch Notepad whenever the trigger fires
+                td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
+
+                // Register the task in the root folder
+                ts.RootFolder.RegisterTaskDefinition(TASK_NAME, td);
+
+                // Remove the task
+                //ts.RootFolder.DeleteTask("Test");
+            }
+        }
+
+        public void removeTask()
+        {
+            // Get the service on the local machine
+            using (TaskService ts = new TaskService())
+            {
+                // Remove the task
+                ts.RootFolder.DeleteTask(TASK_NAME);
+            }
         }
     }
 }

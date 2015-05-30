@@ -78,8 +78,8 @@ namespace WinRedditWallpaper
             if (!pic.path.Equals("none") && pic.path != null)
             // note that the path defaults to none because obj is instantiated from settings
             {
-                ThemeChanger tc = new ThemeChanger();
-                tc.changeTheme(pic.path, 600000);
+                ThemeChanger tc = new ThemeChanger(pic.path);
+                tc.changeTheme(600000);
             }
             else
             {
