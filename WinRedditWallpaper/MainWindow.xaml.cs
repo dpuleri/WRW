@@ -25,11 +25,12 @@ namespace WinRedditWallpaper
     {
         private string subredditRawText;
         private PicScraper pic;
+        private List<DailyTriggerTime> triggerTimes;
         public MainWindow(PicScraper pic)
         {
             InitializeComponent();
             this.pic = pic;
-            //PicScraper.scrape();
+            triggerTimes = new List<DailyTriggerTime>();
         }
 
         private void SubredditsTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -86,6 +87,19 @@ namespace WinRedditWallpaper
                 //show dialog box telling user to pic a path
                 MessageBoxResult result = System.Windows.MessageBox.Show("Please choose a folder to download files into and change the theme", "No Folder Entered Error"); 
             }
+        }
+
+        private void AddTime_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //DailyTriggerTime dtt = new DailyTriggerTime();
+            TimePickerWindow tpw = new TimePickerWindow(this);
+            tpw.Show();
+        }
+
+        public void AddToTriggerTimes(DailyTriggerTime dtt)
+        {
+            triggerTimes.Add(dtt);
+            TriggerTimes_LB.Items.Add(dtt);
         }
     }
 }

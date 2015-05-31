@@ -1,0 +1,12 @@
+﻿<Window x:Name="TimePicker1" x:Class="WinRedditWallpaper.TimePickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Please Choose a Time" Height="173" Width="319">
+    <Grid Margin="34,0,0,2" HorizontalAlignment="Left" Width="257">
+        <ComboBox x:Name="Hour_Dropdown" HorizontalAlignment="Left" Margin="21,50,0,0" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.891,0.409" SelectionChanged="Hour_Dropdown_SelectionChanged" />
+        <ComboBox x:Name="Minute_Dropdown" HorizontalAlignment="Left" Margin="81,50,0,0" VerticalAlignment="Top" Width="55" SelectionChanged="Minute_Dropdown_SelectionChanged"/>
+        <ComboBox x:Name="AMPM_Dropdown" Margin="141,50,48,0" VerticalAlignment="Top" SelectionChanged="AMPM_Dropdown_SelectionChanged"/>
+        <Button x:Name="TimeOkay_Button" Content="Okay" HorizontalAlignment="Left" Height="20" Margin="10,110,0,0" VerticalAlignment="Top" Width="78" Click="TimeOkay_Button_Click"/>
+        <Button x:Name="TimeCancel_Button" Content="Cancel" HorizontalAlignment="Left" Height="20" Margin="168,110,-17,0" VerticalAlignment="Top" Width="78" Click="TimeCancel_Button_Click"/>
+    </Grid>
+</Window>
