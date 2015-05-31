@@ -100,6 +100,21 @@ namespace WinRedditWallpaper
         {
             triggerTimes.Add(dtt);
             TriggerTimes_LB.Items.Add(dtt);
+            //foreach(DailyTriggerTime t in triggerTimes)
+            //{
+            //    Debug.WriteLine(t);
+            //}
+        }
+
+        private void DeleteTime_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Remove currently selected item:
+            triggerTimes.Remove((DailyTriggerTime) TriggerTimes_LB.SelectedItem);
+            TriggerTimes_LB.Items.Remove(TriggerTimes_LB.SelectedItem);
+            //foreach (DailyTriggerTime t in triggerTimes)
+            //{
+            //    Debug.WriteLine(t);
+            //}
         }
     }
 }

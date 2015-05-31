@@ -23,8 +23,9 @@
         <Button x:Name="ChooseDir" Content="Choose Download Directory" Grid.Column="1" HorizontalAlignment="Left" Margin="46,53,0,0" Grid.Row="2" VerticalAlignment="Top" Width="158" Click="ChooseDir_Click"/>
         <Button Content="Change Theme" HorizontalAlignment="Left" Margin="75,88,0,0" Grid.Row="2" VerticalAlignment="Top" Width="114" Grid.Column="1" Click="ChangeTheme_Click"/>
         <ListBox x:Name="TriggerTimes_LB" HorizontalAlignment="Left" Height="119" Margin="10,127,0,0" Grid.Row="2" VerticalAlignment="Top" Width="232"/>
-        <Button x:Name="AddTime_Button" Content="Add Time" Grid.Column="1" HorizontalAlignment="Left" Height="18" Margin="90,185,0,0" Grid.Row="2" VerticalAlignment="Top" Width="92" Click="AddTime_Button_Click"/>
+        <Button x:Name="AddTime_Button" Content="Add Time" Grid.Column="1" HorizontalAlignment="Left" Height="18" Margin="90,164,0,0" Grid.Row="2" VerticalAlignment="Top" Width="92" Click="AddTime_Button_Click"/>
         <Label x:Name="WallpaperTimes_Label" Content="Times to download wallpapers (daily):" Margin="10,88,10,154" Grid.Row="2"/>
+        <Button x:Name="DeleteTime_Button" Content="Delete Selected Time" Grid.Column="1" HorizontalAlignment="Left" Height="18" Margin="75,205,0,0" Grid.Row="2" VerticalAlignment="Top" Width="129" Click="DeleteTime_Button_Click"/>
 
     </Grid>
 
