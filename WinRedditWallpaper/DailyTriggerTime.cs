@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 namespace WinRedditWallpaper
 {
     public class DailyTriggerTime
@@ -82,6 +83,33 @@ namespace WinRedditWallpaper
             sb.Append(minute);
             sb.Append(ampm);
             return sb.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            // If parameter is null return false.
+            if (obj == null)
+            {
+                return false;
+            }
+
+            // If parameter cannot be cast return false.
+            DailyTriggerTime other = obj as DailyTriggerTime;
+            if ((System.Object) other == null)
+            {
+                return false;
+            }
+
+            // Return true if the fields match:
+            return (this.hour == other.hour) && (this.minute == other.minute);
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13;
+            hash = (hash * 7) + hour.GetHashCode();
+            hash = (hash * 7) + minute.GetHashCode();
+            return hash;
         }
     }
 }
